@@ -7,9 +7,6 @@
 (s/defschema QueueMessage
   {:body s/Str})
 
-(def queue
-  (q/resolve-queue-url "codecamp2016"))
-
 (def app
   (api
     {:swagger
@@ -24,11 +21,11 @@
              (context "/sqs"[]
                       (GET "/" []
                            :summary "dequeue a message"
-                           (ok (let [{:keys [body]} (q/get-message queue)]
+                           (ok (let [{:keys [body]} (q/get-message @q/queue)]
                                  (if body
                                    {:body body}))))
 
                       (POST "/" []
                             :body [msg QueueMessage]
                             :summary "enqueue a message"
-                            (ok (q/put-message queue (msg :body))))))))
+                            (ok (q/put-message @q/queue (msg :body))))))))

@@ -16,3 +16,7 @@
                               :max-number-of-messages 1
                               :delete true)]
     (-> rcvd :messages first)))
+
+(def queue
+  (delay (resolve-queue-url "codecamp2016")))
+
