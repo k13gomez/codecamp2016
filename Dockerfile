@@ -1,4 +1,4 @@
-FROM java:7
+FROM openjdk:8-jre
 
 COPY target/codecamp2016.jar codecamp2016.jar
 
